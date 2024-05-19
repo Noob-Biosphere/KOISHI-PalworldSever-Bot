@@ -1,7 +1,8 @@
 {
   "name": "koishi-plugin-azimiao-palworld-server-tool",
   "description": "azimiao's palworld server tool",
-  "version": "0.0.1",
+  "author": "Azimiao <admin@azimiao.com>",
+  "version": "1.0.1",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -9,12 +10,31 @@
     "dist"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Noob-Biosphere/KOISHI-PalworldSever-Bot.git"
+  },
   "keywords": [
     "chatbot",
     "koishi",
-    "plugin"
+    "plugin",
+    "palworld"
   ],
   "peerDependencies": {
     "koishi": "^4.17.6"
+  },
+  "koishi": {
+    "description": {
+      "zh": "一个简易的幻兽帕鲁服务器控制脚本"
+    },
+    "service": {
+      "required": [
+        "http"
+      ]
+    },
+    "locales": [
+      "zh"
+    ],
+    "preview": true
   }
 }

@@ -6,8 +6,8 @@ export const name = 'azimiao-palworld-server-tool';
 
 export const inject = ['http'];
 
+// 配置信息
 export * from "./config";
-
 
 export function apply(ctx: Context, config: Config) {
 
@@ -52,13 +52,13 @@ export function apply(ctx: Context, config: Config) {
 
                 if (res.players.length > 0) {
 
-                    msg = `当前共 ${res.players.length} 位帕鲁在线：\n`;
+                    msg = `当前共有 ${res.players.length} 位帕鲁在线：\n`;
                     res.players.forEach((player, index) => {
                         msg += `- [Lv.${player.level}] ${player.name} ${player.userId}\r\n`;
                     });
 
                 } else {
-                    msg = "没有帕鲁在线";
+                    msg = "当前没有帕鲁在线";
                 }
 
             } else {
