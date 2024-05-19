@@ -2,7 +2,7 @@
   "name": "koishi-plugin-azimiao-palworld-server-tool",
   "description": "azimiao's palworld server tool",
   "author": "Azimiao <admin@azimiao.com>",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -20,21 +20,18 @@
     "plugin",
     "palworld"
   ],
+
   "peerDependencies": {
-    "koishi": "^4.17.6"
+    "koishi": "^4.17.0"
   },
   "koishi": {
     "description": {
       "zh": "一个简易的幻兽帕鲁服务器控制脚本"
     },
     "service": {
-      "required": [
-        "http"
-      ]
+      "required": ["http"]
     },
-    "locales": [
-      "zh"
-    ],
+    "locales": ["zh"],
     "preview": true
   }
 }

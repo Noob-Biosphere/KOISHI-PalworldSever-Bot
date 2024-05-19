@@ -12,7 +12,9 @@ export * from "./config";
 export function apply(ctx: Context, config: Config) {
 
     // TODO: 封装复用，减少重复代代码
-    ctx.command("PalworldServerInfo", "获取帕鲁服务器信息").alias(config.serverInfoAlias).action(async (argv, _) => {
+    ctx.command("PalworldServerInfo", "获取帕鲁服务器信息")
+    .alias(config.serverInfoAlias)
+    .action(async (argv, _) => {
 
         let msg = "";
 
@@ -79,7 +81,10 @@ export function apply(ctx: Context, config: Config) {
         return;
     });
 
-    ctx.command("PalworldServerAnnounce", "向帕鲁服务器发送公屏消息").alias(config.serverAnnounceMessage).action(async (argv, message) => {
+    ctx.command("PalworldServerAnnounce <message:text>", "向帕鲁服务器发送公屏消息")
+    .alias(config.serverAnnounceMessage)
+    .usage("注意：若 message 包含空格，请使用英文双引号包住 message")
+    .action(async (argv, message) => {
         await ctx.http.post(
             getFullUrl(config.baseUrl, "announce"),
             JSON.stringify({
@@ -105,7 +110,9 @@ export function apply(ctx: Context, config: Config) {
         return;
     });
 
-    ctx.command("PalworldServerSave", "向幻兽帕鲁服务器发送保存命令").alias(config.serverSave).action(async (argv, message) => {
+    ctx.command("PalworldServerSave", "向幻兽帕鲁服务器发送保存命令")
+    .alias(config.serverSave)
+    .action(async (argv, message) => {
         await ctx.http.post(
             getFullUrl(config.baseUrl, "save"),
             "",
@@ -129,15 +136,18 @@ export function apply(ctx: Context, config: Config) {
     });
 
 
-    ctx.command("PalworldServerKick", "幻兽帕鲁服务器踢出玩家").alias(config.serverKickPlayer).action(async (argv, userid,reason) => {
-        if(!userid){
+    ctx.command("PalworldServerKick <userId:text> [reason:text]", "幻兽帕鲁服务器踢出玩家")
+    .alias(config.serverKickPlayer)
+    .usage("注意：userId 通过用户列表获取，与昵称不同")
+    .action(async (argv, userId,reason) => {
+        if(!userId){
             argv.session?.send((argv.session && !argv.session.isDirect) ? `${segment.at(argv.session.userId)}\r\n${"未输入玩家的 UserID"}` : `未输入玩家的 UserID`);
             return;
         }
         await ctx.http.post(
             getFullUrl(config.baseUrl, "kick"),
             JSON.stringify({
-                "userid" : userid,
+                "userid" : userId,
                 "message": reason ?? "Kick by admin"
             }),
             {
@@ -161,8 +171,11 @@ export function apply(ctx: Context, config: Config) {
     });
 
 
-    ctx.command("PalworldServerBan", "幻兽帕鲁服务器封禁玩家").alias(config.serverBanPlayer).action(async (argv, userid,reason) => {
-        if(!userid){
+    ctx.command("PalworldServerBan <userId:text> [reason:text]", "幻兽帕鲁服务器封禁玩家")
+    .alias(config.serverBanPlayer)
+    .usage("注意：userId 通过用户列表获取，与昵称不同")
+    .action(async (argv, userId,reason) => {
+        if(!userId){
             argv.session?.send((argv.session && !argv.session.isDirect) ? `${segment.at(argv.session.userId)}\r\n${"未输入玩家的 UserID"}` : `未输入玩家的 UserID`);
             return;
         }
@@ -170,7 +183,7 @@ export function apply(ctx: Context, config: Config) {
         await ctx.http.post(
             getFullUrl(config.baseUrl, "ban"),
             JSON.stringify({
-                "userid" : userid,
+                "userid" : userId,
                 "message": reason ?? "Admin Ban"
             }),
             {
@@ -194,15 +207,18 @@ export function apply(ctx: Context, config: Config) {
     });
 
 
-    ctx.command("PalworldServerUnban", "幻兽帕鲁服务器解封玩家").alias(config.serverUnBanPlayer).action(async (argv, userid) => {
-        if(!userid){
+    ctx.command("PalworldServerUnban <userId:text>", "幻兽帕鲁服务器解封玩家")
+    .alias(config.serverUnBanPlayer)
+    .usage("注意：userId 通过用户列表获取，与昵称不同")
+    .action(async (argv, userId) => {
+        if(!userId){
             argv.session?.send((argv.session && !argv.session.isDirect) ? `${segment.at(argv.session.userId)}\r\n${"未输入玩家的 UserID"}` : `未输入玩家的 UserID`);
             return;
         }
         await ctx.http.post(
             getFullUrl(config.baseUrl, "unban"),
             JSON.stringify({
-                "userid" : userid
+                "userid" : userId
             }),
             {
                 headers: {
@@ -223,14 +239,6 @@ export function apply(ctx: Context, config: Config) {
 
         return;
     });
-
-
-    // write your plugin here
-    // ctx.on("message", async (session) => {
-    //     if (session.content === "serverInfo") {
-
-    //     }
-    // });
 }
 
 

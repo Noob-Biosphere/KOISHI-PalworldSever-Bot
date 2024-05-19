@@ -29,7 +29,7 @@
 
 ### 重要：防范中间人获取密码
 
-Palworld Server API 身份验证采用 Basic Auth，即每条请求中都包含 base64 编码的账号与密码。
+Palworld Server API 身份验证采用 Basic Auth，账号与密码采用 base64 编码。
 
 base64 是一个可逆编码，可直接解码出管理员账号与密码。
 

@@ -21,7 +21,7 @@ export type Config = AzimiaoPalworldConnectConfig & AzimiaoPalworldCommandConfig
 // koishi 配置信息
 export const Config: Schema<Config> = Schema.intersect([
     Schema.object({
-        baseUrl: Schema.string().description("幻兽帕鲁服务器 REST API 地址<br>建议公网服务器使用HTTPS确保账号密码安全").required(),
+        baseUrl: Schema.string().description("幻兽帕鲁服务器 REST API 地址(例: http://localhost:8212/v1/api/)<br>建议公网帕鲁服务器使用 HTTPS 反代 API 确保账号密码安全").required(),
         adminName: Schema.string().description("管理员名称").default("admin"),
         adminPassword: Schema.string().description("管理员密码").required(),
     }).description("连接设置"),
